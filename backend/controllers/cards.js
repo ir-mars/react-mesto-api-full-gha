@@ -1,25 +1,25 @@
-const { ForbiddenError } = require('../errors/ForbiddenError');
-const Card = require('../models/card');
-const { SUCCES_ADDED_STATUS } = require('../utils/constants');
-const { notFoundErrorThrow } = require('../middlewares/errorHandler');
+const { ForbiddenError } = require("../errors/ForbiddenError");
+const Card = require("../models/card");
+const { SUCCES_ADDED_STATUS } = require("../utils/constants");
+const { notFoundErrorThrow } = require("../middlewares/errorHandler");
 
 module.exports.getAllCards = (req, res, next) => {
   Card.find({})
-    .populate(['owner', 'likes'])
+    .populate(["owner", "likes"])
     .then((cards) => res.send(cards))
     .catch(next);
 };
 
 module.exports.deleteCard = (req, res, next) => {
   Card.findById(req.params.id)
-    .populate([{ model:'user', path: 'owner' }])
+    .populate([{ model: "user", path: "owner" }])
     .then((deletedCard) => {
       if (!deletedCard) {
         notFoundErrorThrow();
       }
       if (deletedCard.owner._id.toString() !== req.user._id.toString()) {
         throw new ForbiddenError(
-          'Нельзя удалять карточки, созданные другими пользователями'
+          "Нельзя удалять карточки, созданные другими пользователями"
         );
       }
       return deletedCard
