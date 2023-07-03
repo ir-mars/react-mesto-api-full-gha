@@ -1,13 +1,13 @@
-const express = require("express");
-require("dotenv").config();
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const routes = require("./routes/index");
-const cors = require("./middlewares/cors");
-const { requestLogger, errorLogger } = require("./middlewares/logger");
+const express = require('express');
+require('dotenv').config();
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const routes = require('./routes/index');
+const cors = require('./middlewares/cors');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT, BASE_PATH, DATABASE } = require("./configuration");
+const { PORT, BASE_PATH, DATABASE } = require('./configuration');
 
 // создаем приложение
 const app = express();
@@ -28,6 +28,6 @@ app.use(requestLogger);
 app.use(routes);
 app.use(errorLogger);
 app.listen(PORT, () => {
-  console.log("Ссылка на сервер");
+  console.log('Ссылка на сервер');
   console.log(`${BASE_PATH}:${PORT}`);
 });

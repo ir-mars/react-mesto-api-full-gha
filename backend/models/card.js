@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { REGEXP_URL } = require('../utils/constants');
 
 const cardSchema = new mongoose.Schema({
@@ -16,7 +16,7 @@ const cardSchema = new mongoose.Schema({
         return REGEXP_URL.test(url);
       },
       message: function ({ value }) {
-        return value + "- не верная ссылка";
+        return value + '- неверная ссылка';
       },
 
     },
@@ -24,13 +24,13 @@ const cardSchema = new mongoose.Schema({
   owner: {
     required: true,
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
+    ref: 'user',
   },
   likes: [
     {
       type: mongoose.Schema.Types.ObjectId,
       default: [],
-      ref: "user",
+      ref: 'user',
     },
   ],
   createdAt: {
@@ -40,4 +40,4 @@ const cardSchema = new mongoose.Schema({
 },
 );
 
-module.exports = mongoose.model("card", cardSchema);
+module.exports = mongoose.model('card', cardSchema);
