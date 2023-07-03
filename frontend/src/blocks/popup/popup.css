@@ -1,0 +1,16 @@
+.popup {
+    font-family: 'Inter', Arial, sans-serif;
+    /*display: none; когда не нужна анимация*/
+    display: flex; /*меняем для анимации*/
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    visibility: hidden; /*добавляем свойства вместо display none*/
+    opacity: 0;
+    transition: visibility .5s, opacity .8s ease; /*попап появляется из прозрачности и закрывается в прозрачность*/
+}

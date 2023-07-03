@@ -1,0 +1,27 @@
+.popup__close-btn {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: -40px;  /*вынос кнопки за контейнер 32+8=40px*/
+    right: -40px;
+    background-color: rgba(0, 0, 0, 0);
+    background: url(../../../images/close-btn.svg);
+    background-position: center;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.popup__close-btn:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 586px) {
+    .popup__close-btn {
+        width: 20px;
+        height: 20px;
+        top: -36px;
+        right: 0;
+        background-size: contain;
+    }
+}

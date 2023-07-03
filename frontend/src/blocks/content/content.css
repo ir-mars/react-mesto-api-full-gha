@@ -1,0 +1,17 @@
+.content {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 40px 0 66px;
+    gap: 51px;
+    flex: 1;  /*добавили свойство для создвния липкого футера*/
+}
+
+@media screen and (max-width: 586px) {
+    .content {
+        padding-top: 42px;
+        padding-bottom: 48px;
+        gap: 36px;
+    }
+}

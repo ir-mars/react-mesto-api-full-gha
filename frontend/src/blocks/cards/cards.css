@@ -1,0 +1,24 @@
+.cards {
+    font-family: 'Inter', Arial, sans-serif;
+    max-width: 880px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 17px;
+    margin: 0; 
+}
+
+@media screen and (max-width: 908px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+        padding-left: 19px;
+        padding-right: 19px;
+    }
+}
+
+@media screen and (max-width: 586px) {
+    .cards {
+        grid-template-columns: 1fr;
+        max-width: 548px;
+        gap: 20px;
+    }
+}
