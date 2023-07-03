@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
-const bcrypt = require('bcryptjs');
+const mongoose = require("mongoose");
+const validator = require("validator");
+const bcrypt = require("bcryptjs");
 
-const { REGEXP_URL } = require('../utils/constants');
-const { UnauthorizedError } = require('../errors/UnauthorizedError');
+const { REGEXP_URL } = require("../utils/constants");
+const { UnauthorizedError } = require("../errors/UnauthorizedError");
 
 const userSchema = new mongoose.Schema(
   {
@@ -12,20 +12,20 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: 2,
       maxlength: 30,
-      default: 'Жак-Ив Кусто',
+      default: "Жак-Ив Кусто",
     },
     about: {
       type: String,
       required: true,
       minlength: 2,
       maxlength: 30,
-      default: 'Исследователь',
+      default: "Исследователь",
     },
     avatar: {
       type: String,
       required: true,
       default:
-        'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
+        "https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png",
       validate: {
         validator (url) {
           return REGEXP_URL.test(url);
@@ -61,15 +61,15 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.statics.findUserByCredentials = async function (email, password) {
-  const user = await this.findOne({ email }).select('+password');
+  const user = await this.findOne({ email }).select("+password");
   if (!user) {
-    throw new UnauthorizedError('Неправильные почта или пароль');
+    throw new UnauthorizedError("Неправильные почта или пароль");
   }
   const isMatched = await bcrypt.compare(password, user.password);
   if (!isMatched) {
-    throw new UnauthorizedError('Неправильные почта или пароль');
+    throw new UnauthorizedError("Неправильные почта или пароль");
   }
   return user;
 };
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model("user", userSchema);

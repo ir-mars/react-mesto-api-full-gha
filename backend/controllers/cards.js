@@ -40,7 +40,7 @@ module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   const ownerId = req.user._id;
   Card.create({ name, link, owner: ownerId })
-    .then((card) => card.populate('owner'))
+    .then((card) => card.populate("owner"))
     .then((card) => res.status(SUCCES_ADDED_STATUS).send(card))
     .catch(next);
 };
@@ -52,8 +52,8 @@ module.exports.likeCard = (req, res, next) => {
     { new: true }
   )
     .populate([
-      { path: 'likes', model: 'user' },
-      { path: 'owner', model: 'user' },
+      { path: "likes", model: "user" },
+      { path: "owner", model: "user" },
     ])
     .then((card) => {
       const response = card || notFoundErrorThrow();
@@ -69,8 +69,8 @@ module.exports.dislikeCard = (req, res, next) => {
     { new: true }
   )
     .populate([
-      { path: 'likes', model: 'user' },
-      { path: 'owner', model: 'user' },
+      { path: "likes", model: "user" },
+      { path: "owner", model: "user" },
     ])
     .then((card) => {
       const response = card || notFoundErrorThrow();

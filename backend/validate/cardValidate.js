@@ -1,5 +1,5 @@
-const { Joi, celebrate } = require('celebrate');
-const { REGEXP_URL } = require('../utils/constants');
+const { Joi, celebrate } = require("celebrate");
+const { REGEXP_URL } = require("../utils/constants");
 
 module.exports.validateCardData = celebrate({
   body: Joi.object().keys({

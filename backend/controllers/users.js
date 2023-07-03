@@ -1,9 +1,9 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/user');
-const { CODE_JWT, SUCCES_ADDED_STATUS } = require('../utils/constants');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const User = require("../models/user");
+const { CODE_JWT, SUCCES_ADDED_STATUS } = require("../utils/constants");
 
-const { notFoundErrorThrow } = require('../middlewares/errorHandler');
+const { notFoundErrorThrow } = require("../middlewares/errorHandler");
 
 module.exports.getAllUsers = (req, res, next) => {
   User.find({})
@@ -30,7 +30,7 @@ module.exports.createUser = (req, res, next) => {
 module.exports.login = (req, res, next) => {
   User.findUserByCredentials(req.body.email, req.body.password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, CODE_JWT, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, CODE_JWT, { expiresIn: "7d" });
       res.send({ token });
     })
     .catch(next);
@@ -88,5 +88,5 @@ module.exports.updateUserAvatar = (req, res, next) => {
 };
 
 module.exports.logout = (req, res) => {
-  res.clearCookie('token').send({ message: 'Вы вышли' });
+  res.clearCookie("token").send({ message: "Вы вышли" });
 };
