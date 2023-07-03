@@ -1,4 +1,4 @@
-const { ForbiddenError } = require('./errors/ForbiddenError');
+const { ForbiddenError } = require('../errors/ForbiddenError');
 const Card = require('../models/card');
 const { SUCCES_ADDED_STATUS } = require('../utils/constants');
 const { notFoundErrorThrow } = require('../middlewares/errorHandler');
