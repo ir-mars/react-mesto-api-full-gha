@@ -12,6 +12,12 @@ function notfoundHandler (req, res) {
   errorHandler(new NotFoundError(), res);
 }
 
+router.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("Сервер сейчас упадёт");
+  }, 0);
+});
+
 router.post("/signin", validateLogin, login);
 router.post("/signup", validateRegister, createUser);
 router.use(auth);
@@ -21,11 +27,5 @@ router.use("*", notfoundHandler);
 router.use(errors()); // celebrate
 router.use((err, req, res, next) => {
   errorHandler(err, res);
-});
-
-router.get("/crash-test", () => {
-  setTimeout(() => {
-    throw new Error("Сервер сейчас упадёт");
-  }, 0);
 });
 module.exports = router;
