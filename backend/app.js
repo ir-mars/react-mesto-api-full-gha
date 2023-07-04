@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const routes = require("./routes/index");
 const cors = require("./middlewares/cors");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
+const { errorHandler } = require("../middlewares/errorHandler");
 
 const { PORT, BASE_PATH, DATABASE } = require("./configuration");
 
@@ -23,10 +24,16 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors);
+
 app.use(requestLogger);
-// роуты
 app.use(routes);
 app.use(errorLogger);
+app.use(errors());
+
+app.use((err, req, res, next) => {
+  errorHandler(err, res);
+});
+
 app.listen(PORT, () => {
   console.log("Ссылка на сервер");
   console.log(`${BASE_PATH}:${PORT}`);
