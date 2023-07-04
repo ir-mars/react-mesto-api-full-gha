@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema(
           return REGEXP_URL.test(url);
         },
         message ({ value }) {
-          return `${value} - неверная ссылка`;
+          return `${value}- не верная ссылка`;
         },
       },
     },

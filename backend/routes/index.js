@@ -1,5 +1,5 @@
+/* eslint-disable prettier/prettier */
 const router = require("express").Router();
-const { errors } = require("celebrate");
 const routerUsers = require("./users");
 const routerCards = require("./cards");
 const { login, createUser } = require("../controllers/users");
@@ -11,22 +11,17 @@ const auth = require("../middlewares/auth");
 function notfoundHandler (req, res) {
   errorHandler(new NotFoundError(), res);
 }
-
 router.get("/crash-test", () => {
   setTimeout(() => {
     throw new Error("Сервер сейчас упадёт");
   }, 0);
 });
-
 router.post("/signin", validateLogin, login);
 router.post("/signup", validateRegister, createUser);
-
 router.use(auth);
 router.use("/users", routerUsers);
 router.use("/cards", routerCards);
 router.use("*", notfoundHandler);
-router.use(errors()); // celebrate
-router.use((err, req, res, next) => {
-  errorHandler(err, res);
-});
+
+
 module.exports = router;

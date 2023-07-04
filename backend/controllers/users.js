@@ -31,11 +31,16 @@ module.exports.login = (req, res, next) => {
   User.findUserByCredentials(req.body.email, req.body.password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, CODE_JWT, { expiresIn: "7d" });
-      res.send({ token });
+      res
+        // .cookie("token", token, {
+        //   maxAge: 604800, // неделя в секундах)
+        //   httpOnly: true,
+        //   sameSite: true,
+        // })
+        .send({ token });
     })
     .catch(next);
 };
-
 function getUserById (_id, res, next) {
   User.findById({ _id })
     .then((user) => {
@@ -47,7 +52,6 @@ function getUserById (_id, res, next) {
     })
     .catch(next);
 }
-
 module.exports.getUserData = (req, res, next) => {
   const { _id } = req.user;
   getUserById(_id, res, next);
@@ -86,7 +90,6 @@ module.exports.updateUserAvatar = (req, res, next) => {
   const dataToUpdate = { avatar };
   updateUserData(req, res, next, dataToUpdate);
 };
-
 module.exports.logout = (req, res) => {
   res.clearCookie("token").send({ message: "Вы вышли" });
 };

@@ -8,12 +8,6 @@
       }
     ],
     "import/no-extraneous-dependencies": "off",
-    "no-console": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        "endOfLine": "off"
-      }
-    ],
+    "no-console": "off"
   }
 }

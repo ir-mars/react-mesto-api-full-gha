@@ -37,7 +37,6 @@ function errorHandler (error, response) {
 function notFoundErrorThrow () {
   throw new NotFoundError();
 }
-
 module.exports = {
   errorHandler,
   notFoundErrorThrow,

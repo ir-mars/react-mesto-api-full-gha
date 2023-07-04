@@ -11,6 +11,7 @@ module.exports.getAllCards = (req, res, next) => {
 };
 
 module.exports.deleteCard = (req, res, next) => {
+  /* const _id = req.card._id; */
   Card.findById(req.params.id)
     .populate([{ model: "user", path: "owner" }])
     .then((deletedCard) => {
@@ -35,7 +36,6 @@ module.exports.deleteCard = (req, res, next) => {
     })
     .catch(next);
 };
-
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   const ownerId = req.user._id;
@@ -61,7 +61,6 @@ module.exports.likeCard = (req, res, next) => {
     })
     .catch(next);
 };
-
 module.exports.dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
     req.params.id,

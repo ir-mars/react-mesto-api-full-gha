@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { REGEXP_URL } = require("../utils/constants");
+const { REGEXP_URL } = require('../utils/constants');
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -16,8 +16,9 @@ const cardSchema = new mongoose.Schema({
         return REGEXP_URL.test(url);
       },
       message: function ({ value }) {
-        return value + "неверная ссылка";
+        return value + "- не верная ссылка";
       },
+
     },
   },
   owner: {
@@ -36,5 +37,7 @@ const cardSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
+},
+);
+
 module.exports = mongoose.model("card", cardSchema);
