@@ -30,9 +30,9 @@ app.use(routes);
 app.use(errorLogger);
 app.use(errors());
 
-app.use((err, req, res, next) => {
+/*app.use((err, req, res, next) => {
   errorHandler(err, res);
-});
+});*/
 
 app.listen(PORT, () => {
   console.log("Ссылка на сервер");

@@ -26,7 +26,7 @@ router.use("/users", routerUsers);
 router.use("/cards", routerCards);
 router.use("*", notfoundHandler);
 router.use(errors()); // celebrate
-/*router.use((err, req, res, next) => {
+router.use((err, req, res, next) => {
   errorHandler(err, res);
-});*/
+});
 module.exports = router;
