@@ -195,7 +195,8 @@ function App () {
     const token = localStorage.getItem('token');
     if (token) {
       auth.checkToken(token)
-        .then(() => {
+        .then(({ email }) => {
+          setAuthUserEmail(email);
           setLoggedIn(true);
           navigate("/", { replace: true })
         })

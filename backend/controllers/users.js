@@ -1,9 +1,12 @@
+/* eslint-disable prettier/prettier */
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-const { CODE_JWT, SUCCES_ADDED_STATUS } = require("../utils/constants");
+const { SUCCES_ADDED_STATUS } = require("../utils/constants");
 
 const { notFoundErrorThrow } = require("../middlewares/errorHandler");
+const { ConflictError } = require("../errors/ConflictError");
+const { CODE_JWT } = require("../configuration");
 
 module.exports.getAllUsers = (req, res, next) => {
   User.find({})
@@ -22,7 +25,16 @@ module.exports.createUser = (req, res, next) => {
         avatar,
         email,
         password: hashCode,
-      }).then((user) => res.status(SUCCES_ADDED_STATUS).send(user))
+      })
+        .then((user) => res.status(SUCCES_ADDED_STATUS).send(user))
+        .catch((err) => {
+          if (err.code === 11000) {
+            next(new ConflictError("Пользователь с данным email уже существует"));
+          } else {
+            next(err)
+          }
+        }
+        )
     )
     .catch(next);
 };

@@ -1,21 +1,17 @@
+/* eslint-disable prettier/prettier */
 const mongoose = require("mongoose");
 const { ForbiddenError } = require("../errors/ForbiddenError");
 const { NotFoundError } = require("../errors/NotFoundError");
 const { UnauthorizedError } = require("../errors/UnauthorizedError");
+const { ConflictError } = require("../errors/ConflictError");
+
+const { CastError, ValidationError } = mongoose.Error;
 const {
-  ERROR_CONFLICT,
   ERROR_BAD_REQUEST,
   ERROR_INTERNAL_SERVER,
 } = require("../utils/constants");
 
-const { CastError, ValidationError } = mongoose.Error;
-
 function errorHandler (error, response) {
-  if (error.code === 11000) {
-    return response
-      .status(ERROR_CONFLICT)
-      .send({ message: "Пользователь с указанным email уже зарегистрирован" });
-  }
   if (error instanceof CastError || error instanceof ValidationError) {
     return response
       .status(ERROR_BAD_REQUEST)
@@ -24,7 +20,8 @@ function errorHandler (error, response) {
   if (
     error instanceof NotFoundError ||
     error instanceof UnauthorizedError ||
-    error instanceof ForbiddenError
+    error instanceof ForbiddenError ||
+    error instanceof ConflictError
   ) {
     const { message, statusCode } = error;
     return response.status(statusCode).send({ message });

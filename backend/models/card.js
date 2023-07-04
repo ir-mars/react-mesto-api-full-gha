@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { REGEXP_URL } = require('../utils/constants');
+const validator = require("validator");
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -12,13 +12,12 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: function (url) {
-        return REGEXP_URL.test(url);
-      },
-      message: function ({ value }) {
-        return value + "- не верная ссылка";
-      },
-
+      validator: (v) =>
+        validator.isURL(v, {
+          protocols: ["http", "https"],
+          require_protocol: true,
+        }),
+      message: ({ value }) => `${value} - некоректный адрес URL`,
     },
   },
   owner: {
@@ -37,7 +36,6 @@ const cardSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-},
-);
+});
 
 module.exports = mongoose.model("card", cardSchema);

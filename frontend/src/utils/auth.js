@@ -43,5 +43,4 @@ export function checkToken (token) {
         },
     })
         .then(checkResponse)
-        .then(({ data }) => data)
 };

@@ -1,7 +1,6 @@
 const REGEXP_URL =
   /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
-const CODE_JWT =
-  "5NjYsImV4cCI6MTY4MzAyMzc2Nn0eyJfaWQiOiI2NDQ3OGJkZGRhNzVlYWYxZjZlNDU3YWEiLCJpYXQiOjE2ODI0MTg";
+
 const SUCCES_ADDED_STATUS = 201;
 const ERROR_INTERNAL_SERVER = 500;
 const ERROR_NOT_FOUND = 404;
@@ -11,7 +10,6 @@ const ERROR_FORBIDDEN = 403;
 const ERROR_CONFLICT = 409;
 
 module.exports = {
-  CODE_JWT,
   REGEXP_URL,
   SUCCES_ADDED_STATUS,
   ERROR_INTERNAL_SERVER,
